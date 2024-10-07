@@ -30,6 +30,11 @@ import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
 // Mock data
+
+interface Emoji {
+  native: string; // or whatever properties you need
+}
+
 const contacts = [
   { id: 1, name: "Ankit", avatar: "https://avatars.githubusercontent.com/u/122344948?v=4", lastMessage: "Hey, how are you?", status: "Available", phone: "+1234567890" },
   { id: 2, name: "Bob", avatar: "/placeholder-user.jpg", lastMessage: "Can we meet tomorrow?", status: "At work", phone: "+1987654321" },
@@ -54,8 +59,9 @@ const WhatsAppChatUI = () => {
   const [editingMessageId, setEditingMessageId] = useState<number | null>(null)
   const [editMessageContent, setEditMessageContent] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
+  
   const [currentUser, setCurrentUser] = useState({
-    name: "Ankuu",
+    name: "LiveWithCodeAnkit",
     avatar: "https://avatars.githubusercontent.com/u/144792548?v=4",
     status: "Available"
   })
@@ -112,13 +118,13 @@ const WhatsAppChatUI = () => {
     setEditMessageContent("")
   }
 
-  const handleEmojiSelect = (emoji: any) => {
+  const handleEmojiSelect = (emoji: Emoji) => {
     if (editingMessageId !== null) {
-      setEditMessageContent(prev => prev + emoji.native)
+      setEditMessageContent(prev => prev + emoji.native);
     } else {
-      setMessageInput(prev => prev + emoji.native)
+      setMessageInput(prev => prev + emoji.native);
     }
-  }
+  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
